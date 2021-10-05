@@ -1,0 +1,7 @@
+{"level":"INFO","ts":"2021-10-05T18:21:43.815+0800","caller":"logger/logger.go:68","msg":"/index","status":200,"method":"GET","path":"/index","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36","errors":"","cost":0.0003852}
+{"level":"INFO","ts":"2021-10-05T18:21:49.366+0800","caller":"buble/main.go:69","msg":"Shutdown Server ..."}
+{"level":"INFO","ts":"2021-10-05T18:21:49.366+0800","caller":"buble/main.go:77","msg":"Server exiting"}
+{"level":"INFO","ts":"2021-10-05T18:21:58.101+0800","caller":"logger/logger.go:68","msg":"/index","status":200,"method":"GET","path":"/index","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","ts":"2021-10-05T18:21:59.436+0800","caller":"logger/logger.go:68","msg":"/index","status":200,"method":"GET","path":"/index","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","ts":"2021-10-05T18:22:05.016+0800","caller":"buble/main.go:69","msg":"Shutdown Server ..."}
+{"level":"INFO","ts":"2021-10-05T18:22:05.031+0800","caller":"buble/main.go:77","msg":"Server exiting"}
