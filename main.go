@@ -19,33 +19,33 @@ import (
 )
 
 func main() {
-	//加载配置
+	//1.加载配置
 	if err:=setttings.Init();err!=nil{
 		fmt.Printf("init setting failed,err:%s\n",err)
 		return
 	}
-	//初始化日志
+	//2.初始化日志
 	if err:=logger.Init();err!=nil{
 		fmt.Printf("init logger failed,err:%s\n",err)
 		return
 	}
 	zap.L()
 	defer zap.L().Sync()
-	//初始化MySQL连接
+	//3.初始化MySQL连接
 	if err:=mysql.Init();err!=nil{
 		fmt.Printf("init dao failed,err:%s\n",err)
 		return
 	}
 	defer mysql.Close()
-	//初始化Redis连接
+	//4.初始化Redis连接
 	if err:=redis.Init();err!=nil{
 		fmt.Printf("init dao failed,err:%s\n",err)
 		return
 	}
 	defer redis.Close()
-	//注册路由
+	//5.注册路由
 	r:=routers.Setup()
-	//启动服务
+	//6.启动服务
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d",viper.GetInt("app.port")),
 		Handler: r,
@@ -58,7 +58,7 @@ func main() {
 		}
 	}()
 
-	// 等待中断信号来优雅地关闭服务器，为关闭服务器操作设置一个5秒的超时
+	// 等待中断信号来关闭服务器，为关闭服务器操作设置一个5秒的超时
 	quit := make(chan os.Signal, 1) // 创建一个接收信号的通道
 	// kill 默认会发送 syscall.SIGTERM 信号
 	// kill -2 发送 syscall.SIGINT 信号，我们常用的Ctrl+C就是触发系统SIGINT信号
@@ -70,7 +70,7 @@ func main() {
 	// 创建一个5秒超时的context
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	// 5秒内优雅关闭服务（将未处理完的请求处理完再关闭服务），超过5秒就超时退出
+	// 5秒内关闭服务（将未处理完的请求处理完再关闭服务），超过5秒就超时退出
 	if err := srv.Shutdown(ctx); err != nil {
 		zap.L().Info("Server Shutdown: ", zap.Error(err))
 	}

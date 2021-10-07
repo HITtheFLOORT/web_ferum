@@ -24,7 +24,7 @@ func Init() (err error){
 		fmt.Println(err.Error())
 		return
 	}else{
-		fmt.Printf("%s is connected", "mysql")
+		fmt.Printf("%s is connected\n", "mysql")
 	}
 	return
 }
