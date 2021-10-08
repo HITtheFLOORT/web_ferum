@@ -26,7 +26,31 @@ import (
 	"strings"
 	"time"
 )
-var sugarLogger *zap.SugaredLogger
+func Init()(err error){
+	writer:=getLogWriter()
+	encode:=getEncoder()
+	var l=new(zapcore.Level)
+	if err=l.UnmarshalText([]byte(viper.GetString("log.level")));err!=nil{
+		fmt.Printf("get zap setting failed,err:%s\n",err.Error())
+		return
+	}
+	if viper.GetString("app.mode")=="dev"{
+		consoleencode:=zapcore.NewConsoleEncoder(zap.NewDevelopmentEncoderConfig())
+		core:=zapcore.NewTee(
+			zapcore.NewCore(consoleencode,zapcore.Lock(os.Stdout),zapcore.DebugLevel),
+			zapcore.NewCore(encode,writer,l),
+			)
+		lg:=zap.New(core,zap.AddCaller())
+		zap.ReplaceGlobals(lg)
+	}else{
+
+		core:=zapcore.NewCore(encode,writer,l)
+		lg:=zap.New(core,zap.AddCaller())
+		zap.ReplaceGlobals(lg)
+	}
+
+	return
+}
 func getEncoder()zapcore.Encoder{
 	encoderConfig := zap.NewProductionEncoderConfig()
 	encoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
@@ -44,19 +68,7 @@ func getLogWriter() zapcore.WriteSyncer {
 	return zapcore.AddSync(lumberJackLogger)
 }
 
-func Init()(err error){
-	writer:=getLogWriter()
-	encode:=getEncoder()
-	var l=new(zapcore.Level)
-	if err=l.UnmarshalText([]byte(viper.GetString("log.level")));err!=nil{
-		fmt.Printf("get zap setting failed,err:%s\n",err.Error())
-		return
-	}
-	core:=zapcore.NewCore(encode,writer,l)
-	lg:=zap.New(core,zap.AddCaller())
-	zap.ReplaceGlobals(lg)
-	return
-}
+
 func GinLogger() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := time.Now()
@@ -96,7 +108,7 @@ func GinRecovery(stack bool) gin.HandlerFunc {
 
 				httpRequest, _ := httputil.DumpRequest(c.Request, false)
 				if brokenPipe {
-					sugarLogger.Error(c.Request.URL.Path,
+					zap.L().Error(c.Request.URL.Path,
 						zap.Any("error", err),
 						zap.String("request", string(httpRequest)),
 					)
@@ -107,13 +119,13 @@ func GinRecovery(stack bool) gin.HandlerFunc {
 				}
 
 				if stack {
-					sugarLogger.Error("[Recovery from panic]",
+					zap.L().Error("[Recovery from panic]",
 						zap.Any("error", err),
 						zap.String("request", string(httpRequest)),
 						zap.String("stack", string(debug.Stack())),
 					)
 				} else {
-					sugarLogger.Error("[Recovery from panic]",
+					zap.L().Error("[Recovery from panic]",
 						zap.Any("error", err),
 						zap.String("request", string(httpRequest)),
 					)
@@ -124,33 +136,3 @@ func GinRecovery(stack bool) gin.HandlerFunc {
 		c.Next()
 	}
 }
-//func simpleHttpGet(url string) {
-//	sugarLogger.Debugf("Trying to hit GET request for %s", url)
-//	resp, err := http.Get(url)
-//	if err != nil {
-//		sugarLogger.Errorf("Error fetching URL %s : Error = %s", url, err)
-//	} else {
-//		sugarLogger.Infof("Success! statusCode = %s for URL %s", resp.Status, url)
-//		resp.Body.Close()
-//	}
-//}
-//func main() {
-//	Init()
-//	r := gin.New()
-//	// 注册zap相关中间件
-//	r.Use(GinLogger(), GinRecovery(true))
-//
-//	r.GET("/hello", func(c *gin.Context) {
-//		// 假设你有一些数据需要记录到日志中
-//		var (
-//			name = "q1mi"
-//			age  = 18
-//		)
-//		// 记录日志并使用zap.Xxx(key, val)记录相关字段
-//		zap.L().Debug("this is hello func", zap.String("user", name), zap.Int("age", age))
-//
-//		c.String(http.StatusOK, "hello liwenzhou.com!")
-//	})
-//
-//	r.Run(":8080")
-//}
