@@ -1,6 +1,7 @@
 package routers
 
 import (
+	Middleware "buble/Middleware"
 	"buble/controller"
 	"buble/logger"
 	"buble/utils"
@@ -15,6 +16,7 @@ func Setup()(r *gin.Engine){
 	fisrpage_router(r)
 	signup_router(r)
 	login_router(r)
+	ping_router(r)
 	_404_router(r)
 	return r
 }
@@ -30,8 +32,15 @@ func signup_router(r *gin.Engine){
 	})
 }
 func login_router(r *gin.Engine){
-	r.POST("/login", func(c *gin.Context) {
+	r.POST("/login",func(c *gin.Context) {
 		controller.LoginHandler(c)
+	})
+}
+func ping_router(r *gin.Engine){
+	r.POST("/ping", Middleware.JWTAuthMiddleware(),func(c *gin.Context) {
+		c.JSON(http.StatusOK,gin.H{
+			"msg":"success",
+		})
 	})
 }
 func _404_router(r *gin.Engine){

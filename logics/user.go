@@ -30,14 +30,19 @@ func Signup(p *models.ParamSignUp)error{
 	}
 	return err
 }
-func Login(p *models.ParamLogin)error{
+func Login(p *models.ParamLogin)(token string,err error){
 	//判断用户名和密码
 	pass,err:=mysql.QueryuserbyPassword(p)
 	if err!=nil{
-		return err
+		return "",err
 	}
 	if pass!=utils.EncryptPassword(p.Password){//用户名和密码不正确
-		return errors.New("用户名或密码不正确")
+		return "",errors.New("用户名或密码不正确")
 	}
-	return nil
+	//登陆成功获取token
+	id,err:=mysql.QueryidbyPassword(p)
+	if err!=nil{
+		return "",err
+	}
+	return utils.GenToken(id,p.Username),nil
 }

@@ -22,9 +22,17 @@ func InsertUser(user *models.User)(sql.Result,error){
 }
 func QueryuserbyPassword(login *models.ParamLogin)(string,error){
 	sqlStr:=`select password from user where username = ?`
-	var name string
-	if err:=DB.Get(&name,sqlStr,login.Username);err!=nil{
-		return name,errors.New("用户名或密码不真确")
+	var password string
+	if err:=DB.Get(&password,sqlStr,login.Username);err!=nil{
+		return password,errors.New("用户名或密码不真确")
 	}
-	return name,nil
+	return password,nil
+}
+func QueryidbyPassword(login *models.ParamLogin)(uint64,error){
+	sqlStr:=`select user_id from user where username = ?`
+	var id uint64
+	if err:=DB.Get(&id,sqlStr,login.Username);err!=nil{
+		return id,errors.New("用户名或密码不真确")
+	}
+	return id,nil
 }

@@ -56,7 +56,8 @@ func LoginHandler(c *gin.Context){
 		return
 	}
 	//2.业务处理
-	if err:=logics.Login(&p);err!=nil{
+	token,err:=logics.Login(&p)
+	if err!=nil{
 		c.JSON(http.StatusOK,gin.H{
 			"msg":err.Error(),
 		})
@@ -65,6 +66,7 @@ func LoginHandler(c *gin.Context){
 	//3.返回响应
 	c.JSON(http.StatusOK,gin.H{
 		"msg":"登陆成功",
+		"token":token,
 	})
 	return
 }

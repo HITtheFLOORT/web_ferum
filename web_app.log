@@ -5,3 +5,24 @@
 {"level":"INFO","ts":"2021-10-08T16:05:05.802+0800","caller":"logger/logger.go:80","msg":"/login/","status":404,"method":"POST","path":"/login/","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.28.4","errors":"","cost":0}
 {"level":"INFO","ts":"2021-10-08T16:05:31.772+0800","caller":"buble/main.go:69","msg":"Shutdown Server ..."}
 {"level":"INFO","ts":"2021-10-08T16:05:31.788+0800","caller":"buble/main.go:77","msg":"Server exiting"}
+{"level":"INFO","ts":"2021-10-08T16:05:38.022+0800","caller":"logger/logger.go:80","msg":"/login","status":200,"method":"POST","path":"/login","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.28.4","errors":"","cost":0.0010161}
+{"level":"INFO","ts":"2021-10-08T16:05:46.880+0800","caller":"logger/logger.go:80","msg":"/login","status":200,"method":"POST","path":"/login","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.28.4","errors":"","cost":0.0003204}
+{"level":"ERROR","ts":"2021-10-08T16:05:51.603+0800","caller":"controller/user.go:46","msg":"Login with invalid param","error":"Key: 'ParamLogin.password' Error:Field validation for 'password' failed on the 'required' tag"}
+{"level":"INFO","ts":"2021-10-08T16:05:51.604+0800","caller":"logger/logger.go:80","msg":"/login","status":200,"method":"POST","path":"/login","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.28.4","errors":"","cost":0.0010591}
+{"level":"INFO","ts":"2021-10-08T16:05:57.000+0800","caller":"logger/logger.go:80","msg":"/login","status":200,"method":"POST","path":"/login","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.28.4","errors":"","cost":0.0006786}
+{"level":"INFO","ts":"2021-10-08T16:58:41.014+0800","caller":"buble/main.go:69","msg":"Shutdown Server ..."}
+{"level":"INFO","ts":"2021-10-08T16:58:41.028+0800","caller":"buble/main.go:77","msg":"Server exiting"}
+{"level":"INFO","ts":"2021-10-11T15:13:44.007+0800","caller":"logger/logger.go:80","msg":"/login","status":200,"method":"POST","path":"/login","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.28.4","errors":"","cost":0.3695347}
+{"level":"INFO","ts":"2021-10-11T15:28:07.975+0800","caller":"buble/main.go:69","msg":"Shutdown Server ..."}
+{"level":"INFO","ts":"2021-10-11T15:28:07.977+0800","caller":"buble/main.go:77","msg":"Server exiting"}
+{"level":"INFO","ts":"2021-10-11T15:28:41.261+0800","caller":"logger/logger.go:80","msg":"/login","status":200,"method":"POST","path":"/login","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.28.4","errors":"","cost":0.003721}
+{"level":"INFO","ts":"2021-10-11T15:28:50.782+0800","caller":"logger/logger.go:80","msg":"/ping","status":404,"method":"POST","path":"/ping","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.28.4","errors":"","cost":0}
+{"level":"INFO","ts":"2021-10-11T15:33:42.207+0800","caller":"buble/main.go:69","msg":"Shutdown Server ..."}
+{"level":"INFO","ts":"2021-10-11T15:33:42.214+0800","caller":"buble/main.go:77","msg":"Server exiting"}
+{"level":"INFO","ts":"2021-10-11T15:33:58.434+0800","caller":"logger/logger.go:80","msg":"/ping","status":200,"method":"POST","path":"/ping","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.28.4","errors":"","cost":0.0005047}
+{"level":"INFO","ts":"2021-10-11T15:37:57.543+0800","caller":"buble/main.go:69","msg":"Shutdown Server ..."}
+{"level":"INFO","ts":"2021-10-11T15:37:57.557+0800","caller":"buble/main.go:77","msg":"Server exiting"}
+{"level":"INFO","ts":"2021-10-11T15:38:04.699+0800","caller":"logger/logger.go:80","msg":"/ping","status":200,"method":"POST","path":"/ping","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.28.4","errors":"","cost":0.0005451}
+{"level":"INFO","ts":"2021-10-11T15:38:11.351+0800","caller":"logger/logger.go:80","msg":"/ping","status":200,"method":"POST","path":"/ping","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.28.4","errors":"","cost":0}
+{"level":"INFO","ts":"2021-10-11T15:56:53.039+0800","caller":"buble/main.go:69","msg":"Shutdown Server ..."}
+{"level":"INFO","ts":"2021-10-11T15:56:53.043+0800","caller":"buble/main.go:77","msg":"Server exiting"}
